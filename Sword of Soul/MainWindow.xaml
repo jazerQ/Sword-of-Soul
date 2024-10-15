@@ -1,0 +1,13 @@
+﻿<Window x:Class="Sword_of_Soul.WelcomeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Sword_of_Soul"
+        mc:Ignorable="d"
+        Title="MainWindow" WindowState="Maximized" WindowStyle="None" Height="450" Width="800">
+    <Grid>
+        <Image x:Name="IntroImage" Opacity="0" Source="C:\Users\user\source\repos\Sword of Soul\Sword of Soul\images\pngegg.png" Margin="104,69,104,69"/>
+
+    </Grid>
+</Window>

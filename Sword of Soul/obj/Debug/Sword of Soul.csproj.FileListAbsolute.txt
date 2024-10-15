@@ -1,0 +1,16 @@
+C:\Users\user\source\repos\Sword of Soul\Sword of Soul\bin\Debug\Sword of Soul.exe.config
+C:\Users\user\source\repos\Sword of Soul\Sword of Soul\bin\Debug\Sword of Soul.exe
+C:\Users\user\source\repos\Sword of Soul\Sword of Soul\bin\Debug\Sword of Soul.pdb
+C:\Users\user\source\repos\Sword of Soul\Sword of Soul\obj\Debug\Sword of Soul.csproj.AssemblyReference.cache
+C:\Users\user\source\repos\Sword of Soul\Sword of Soul\obj\Debug\MainWindow.g.cs
+C:\Users\user\source\repos\Sword of Soul\Sword of Soul\obj\Debug\App.g.cs
+C:\Users\user\source\repos\Sword of Soul\Sword of Soul\obj\Debug\Sword of Soul_MarkupCompile.cache
+C:\Users\user\source\repos\Sword of Soul\Sword of Soul\obj\Debug\Sword of Soul_MarkupCompile.lref
+C:\Users\user\source\repos\Sword of Soul\Sword of Soul\obj\Debug\MainWindow.baml
+C:\Users\user\source\repos\Sword of Soul\Sword of Soul\obj\Debug\Sword of Soul.g.resources
+C:\Users\user\source\repos\Sword of Soul\Sword of Soul\obj\Debug\Sword_of_Soul.Properties.Resources.resources
+C:\Users\user\source\repos\Sword of Soul\Sword of Soul\obj\Debug\Sword of Soul.csproj.GenerateResource.cache
+C:\Users\user\source\repos\Sword of Soul\Sword of Soul\obj\Debug\Sword of Soul.csproj.CoreCompileInputs.cache
+C:\Users\user\source\repos\Sword of Soul\Sword of Soul\obj\Debug\Sword of Soul.exe
+C:\Users\user\source\repos\Sword of Soul\Sword of Soul\obj\Debug\Sword of Soul.pdb
+C:\Users\user\source\repos\Sword of Soul\Sword of Soul\obj\Debug\Sword of Soul_Content.g.cs
