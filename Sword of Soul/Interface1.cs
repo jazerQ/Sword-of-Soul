@@ -5,8 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Sword_of_Soul
-{
-    internal interface Interface1
+{ 
+    abstract class Animate
     {
+        private string _ImageSource;
+
     }
 }
