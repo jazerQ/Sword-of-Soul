@@ -55,7 +55,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ImageConverter.cs" />
+    <Compile Include="Interface1.cs" />
+    <Compile Include="JazerQStudioWelcomeAnimation.cs" />
     <Compile Include="WelcomeWindow.cs" />
+    <Compile Include="welcomeWindowPrivate.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

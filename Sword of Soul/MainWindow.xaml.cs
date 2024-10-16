@@ -24,12 +24,7 @@ namespace Sword_of_Soul
         public WelcomeWindow()
         {
             InitializeComponent();
-            DoubleAnimation imageAnimation = new DoubleAnimation();
-            imageAnimation.From = IntroImage.Opacity;
-            imageAnimation.To = 1;
-            
-            imageAnimation.Duration = TimeSpan.FromSeconds(5);
-            IntroImage.BeginAnimation(Image.OpacityProperty, imageAnimation);
+            WelcomeAnimation();
         }
     }
 }
