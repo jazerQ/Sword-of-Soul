@@ -13,5 +13,6 @@ namespace Sword_of_Soul
     /// </summary>
     public partial class App : Application
     {
+        
     }
 }

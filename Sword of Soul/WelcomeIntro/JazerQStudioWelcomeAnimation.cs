@@ -12,6 +12,7 @@ namespace Sword_of_Soul
     class JazerQStudioWelcomeAnimation<T> : Animate<T>
         where T : AnimationTimeline
     {
+        
 
         public JazerQStudioWelcomeAnimation(
             string welcomeImageSource,
@@ -31,7 +32,7 @@ namespace Sword_of_Soul
             image.BeginAnimation(Image.OpacityProperty, _ImageAnimation);
             
         }
-        public override async void StartAnimation(Label label)
+        public override void StartAnimation(Label label)
         {
             _ImageAnimation.Duration = TimeSpan.FromSeconds(_duration);
             label.BeginAnimation(Label.OpacityProperty, _ImageAnimation);

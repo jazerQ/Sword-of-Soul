@@ -24,7 +24,20 @@ namespace Sword_of_Soul
         public WelcomeWindow()
         {
             InitializeComponent();
-            WelcomeAnimation();
+            /*WelcomeAnimation();
+            Menu menu = new Menu();
+            menu.Show();
+            this.Close();*/
+            this.Loaded += WelcomeWindow_Loaded;
+        }
+
+        private async void WelcomeWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+
+            await WelcomeAnimation();
+            Menu menu = new Menu();
+            menu.Show();
+            this.Close();
         }
     }
 }

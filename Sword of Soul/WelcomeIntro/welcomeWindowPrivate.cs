@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
 
 namespace Sword_of_Soul
@@ -17,6 +18,7 @@ namespace Sword_of_Soul
         private DoubleAnimation animationImage1 = new DoubleAnimation() { 
             AutoReverse = true
         };
+        
         private void FromToAnimation(DoubleAnimation doubleAnimation, double from, double to)
         {
             doubleAnimation.From = from;
