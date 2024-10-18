@@ -19,9 +19,9 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="100"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Button Grid.Column="1" Content="Играть"  Grid.Row="1"/>
-        <Button Grid.Column="1" Grid.Row="3" Click="Button_Click">
-            <Button Content="Button"/>
+        <Button Grid.Column="1" Content="Играть"  Grid.Row="1" Click="Button_Click_1" />
+        <Button Grid.Column="1" Content="Выход" Grid.Row="3" Click="Button_Click">
+            
         </Button>
     </Grid>
 </Window>

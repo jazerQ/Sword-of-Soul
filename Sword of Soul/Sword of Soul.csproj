@@ -37,6 +37,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -49,12 +50,19 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WpfAnimatedGif, Version=2.0.0.0, Culture=neutral, PublicKeyToken=9e7cd3b544a090dc, processorArchitecture=MSIL">
+      <HintPath>..\packages\WpfAnimatedGif.2.0.2\lib\net40\WpfAnimatedGif.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Cursors.cs" />
+    <Compile Include="game.xaml.cs">
+      <DependentUpon>game.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Menu.xaml.cs">
       <DependentUpon>Menu.xaml</DependentUpon>
     </Compile>
@@ -64,6 +72,10 @@
     <Compile Include="WelcomeIntro\JazerQStudioWelcomeAnimation.cs" />
     <Compile Include="WelcomeIntro\WelcomeWindow.cs" />
     <Compile Include="WelcomeIntro\welcomeWindowPrivate.cs" />
+    <Page Include="game.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -99,6 +111,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -111,6 +124,11 @@
     <Resource Include="images\pngegg.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="images\sword.png" />
+    <Resource Include="sword.cur" />
+    <Resource Include="images\woodenSword.cur" />
+    <Resource Include="images\woodenSwordBetter.cur" />
+    <Resource Include="animation\Skeleton Idle.gif" />
     <Content Include="music\Ale-and-Anecdotes-MP3%28chosic.com%29.mp3" />
     <Content Include="music\The-Pyre%28chosic.com%29.mp3" />
   </ItemGroup>

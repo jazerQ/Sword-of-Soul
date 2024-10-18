@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,37 +9,26 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
+using WpfAnimatedGif;
 
 namespace Sword_of_Soul
 {
-
     /// <summary>
-    /// Логика взаимодействия для Menu.xaml
+    /// Логика взаимодействия для game.xaml
     /// </summary>
-    public partial class Menu : Window
+    public partial class game : Window
     {
-        public Menu()
+        public game()
         {
-            
             InitializeComponent();
-
-            Cursors.setCurrentCursor(0);
             Cursors.Set(this);
+            ImageBehavior.SetAnimatedSource(skeleton, new BitmapImage(new Uri(@"animation/Skeleton Idle.gif", UriKind.RelativeOrAbsolute)));
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            game gameWindow = new game();
-            gameWindow.Show();
-            this.Close();
-        }
+        
     }
 }
