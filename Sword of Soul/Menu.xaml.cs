@@ -27,6 +27,7 @@ namespace Sword_of_Soul
 
             Cursors.setCurrentCursor(0);
             Cursors.Set(this);
+            
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

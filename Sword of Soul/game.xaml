@@ -5,9 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Sword_of_Soul"
         mc:Ignorable="d"
-        Title="game" WindowStyle="None" WindowState="Maximized" Height="450" Width="800">
+        Title="game" WindowStyle="None"  WindowState="Maximized" Height="450" Width="800">
     <Grid>
-        <Image x:Name="skeleton" HorizontalAlignment="Left" Height="100" Margin="298,247,0,0" VerticalAlignment="Top" Width="100"/>
+        <Grid.Background>
+            <ImageBrush ImageSource="C:\Users\user\source\repos\Sword of Soul\Sword of Soul\images\Hills Free (update 3.0).png"/>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="50"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="10"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Image x:Name="placeForMobs" Grid.Row="2" VerticalAlignment="Bottom" Grid.Column="1" Width="64" Height="64" Margin="106,209,105,17"/>
+        <Button x:Name="punchField" VerticalAlignment="Bottom" Grid.Column="1" Opacity="0" Width="64" Height="64" Margin="106,209,105,17" Grid.Row="2" Click="punchField_Click"/>
+        <ProgressBar x:Name="pHpMobs" Opacity="0.75" Grid.Column="1" Grid.Row="1"  Foreground="DarkRed" Value="100"/>
+        <Image x:Name="placeForKnight" VerticalAlignment="Bottom" FlowDirection="RightToLeft" Grid.Row="2" Grid.Column="3" Width="64" Height="64" Margin="105,209,106,17"/>
+        <ProgressBar x:Name="pHpKnight" Opacity="0.75" Grid.Column="3" Grid.Row="1"  Foreground="DarkRed" Value="100"/>
 
     </Grid>
 </Window>

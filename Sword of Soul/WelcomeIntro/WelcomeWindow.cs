@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,6 +18,7 @@ namespace Sword_of_Soul
         
         private Task WelcomeAnimation()
         {
+
             
             return Task.Run(() =>
             {
@@ -36,6 +38,10 @@ namespace Sword_of_Soul
                 }));
                 Task.Delay(7000).Wait();
                 
+                Application.Current.Dispatcher.Invoke(new Action(() =>
+                {
+                    Clos();
+                }));
             });
             
             

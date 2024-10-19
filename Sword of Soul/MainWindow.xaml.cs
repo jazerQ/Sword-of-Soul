@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Media.Animation;
+using System.Threading;
 
 namespace Sword_of_Soul
 {
@@ -21,6 +22,8 @@ namespace Sword_of_Soul
     /// </summary>
     public partial class WelcomeWindow : Window
     {
+        
+        private bool _menuOpened = false;
         public WelcomeWindow()
         {
             InitializeComponent();
@@ -33,11 +36,25 @@ namespace Sword_of_Soul
 
         private async void WelcomeWindow_Loaded(object sender, RoutedEventArgs e)
         {
-
+            
             await WelcomeAnimation();
-            Menu menu = new Menu();
-            menu.Show();
-            this.Close();
+            
+        }
+
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            
+            Clos();
+        }
+        private void Clos()
+        {
+            if (!_menuOpened)
+            {
+                _menuOpened = true;
+                Menu menu = new Menu();
+                menu.Show();
+                this.Close();
+            }
         }
     }
 }

@@ -59,6 +59,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Battle.cs" />
     <Compile Include="Cursors.cs" />
     <Compile Include="game.xaml.cs">
       <DependentUpon>game.xaml</DependentUpon>
@@ -66,6 +67,7 @@
     <Compile Include="Menu.xaml.cs">
       <DependentUpon>Menu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Mob.cs" />
     <Compile Include="Music.cs" />
     <Compile Include="WelcomeIntro\ImageConverter.cs" />
     <Compile Include="WelcomeIntro\Interface1.cs" />
@@ -129,6 +131,11 @@
     <Resource Include="images\woodenSword.cur" />
     <Resource Include="images\woodenSwordBetter.cur" />
     <Resource Include="animation\Skeleton Idle.gif" />
+    <Resource Include="animation\Knight Idle.gif" />
+    <Resource Include="animation\Skeleton Hit.gif" />
+    <Resource Include="images\Hills Free %28update 3.0%29.png" />
+    <Resource Include="animation\Skeleton Attack.gif" />
+    <Resource Include="animation\Skeleton Dead.gif" />
     <Content Include="music\Ale-and-Anecdotes-MP3%28chosic.com%29.mp3" />
     <Content Include="music\The-Pyre%28chosic.com%29.mp3" />
   </ItemGroup>

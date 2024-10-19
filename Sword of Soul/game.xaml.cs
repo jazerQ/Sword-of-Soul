@@ -23,12 +23,38 @@ namespace Sword_of_Soul
     /// </summary>
     public partial class game : Window
     {
+        Skeleton skeleton = new Skeleton(100, 5);
+        Knight knight = new Knight(100, 5);
+        Random rand = new Random();
         public game()
         {
             InitializeComponent();
             Cursors.Set(this);
-            ImageBehavior.SetAnimatedSource(skeleton, new BitmapImage(new Uri(@"animation/Skeleton Idle.gif", UriKind.RelativeOrAbsolute)));
+            Skeleton skeleton = new Skeleton(100, 5);
+            skeleton.Stand(placeForMobs);
+            knight.Stand(placeForKnight);
         }
-        
+
+        private void punchField_Click(object sender, RoutedEventArgs e)
+        {
+            if(skeleton == null)
+            {
+                return;
+            }
+            skeleton.hitPoint -= knight.attack;
+            knight.hitPoint -= skeleton.attack;
+            if(skeleton.hitPoint <= 0) {
+                skeleton.Death(placeForMobs);
+                skeleton = null;
+                punchField.IsEnabled = false;
+                pHpKnight.Value = knight.hitPoint;
+                pHpMobs.Value = 0;
+                return;
+            }
+            knight.attack = rand.Next(5,8);
+            pHpKnight.Value = knight.hitPoint;
+            pHpMobs.Value = skeleton.hitPoint;
+            skeleton.Hit(placeForMobs);
+        }
     }
 }
