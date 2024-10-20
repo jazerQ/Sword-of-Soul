@@ -28,8 +28,8 @@ namespace Sword_of_Soul
         {
             InitializeComponent();
             Cursors.Set(this);
-            Skeleton skeleton = new Skeleton(100, 5);
-            skeleton.Stand(placeForMobs);
+            Mob.Stand(placeForMobs);
+            pHpMobs.Value = Mob.hitPoint;
            
         }
         

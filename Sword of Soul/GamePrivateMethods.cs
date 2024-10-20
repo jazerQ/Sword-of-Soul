@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,9 +10,12 @@ namespace Sword_of_Soul
 {
     public partial class game 
     {
-        private Skeleton skeleton = new Skeleton(100, 5);
+        
         private Knight knight = new Knight(100, 5);
-        private Random rand = new Random();
+        
+        private static Random rand = new Random();
+        private static Mob[] Mobs = new Mob[] { new Skeleton(100,rand.Next(5,8)), new Ghost(100, rand.Next(20, 30)), new Zombie(100, rand.Next(10, 16)) };
+        private static Mob Mob = Mobs[rand.Next(0,3)];
         private int coins = 0; 
 
         //Methods
@@ -19,26 +23,28 @@ namespace Sword_of_Soul
         {
             punchField.IsEnabled = false;
 
-            Battle.MutualAttack(skeleton, knight);
+            Battle.MutualAttack(Mob, knight);
             UpdatingProgressBar();
-            if (skeleton.hitPoint <= 0)
+            if (Mob.hitPoint <= 0)
             {
-                await skeleton.Death(placeForMobs);
-                pHpMobs.Value = 100;
-                skeleton.hitPoint = 100;
+                await Mob.Death(placeForMobs);
+                Mob = Mobs[rand.Next(0, 3)];
+                Mob.Stand(placeForMobs);
+                pHpMobs.Value = Mob.hitPoint;
+                Mob.hitPoint = 100;
                 AddCoins();
                 punchField.IsEnabled = true;
                 return;
             }
             knight.attack = rand.Next(15, 30);
-            await skeleton.Hit(placeForMobs);
+            await Mob.Hit(placeForMobs);
             punchField.IsEnabled = true;
 
         }
         private void UpdatingProgressBar()
         {
             pHpKnight.Value = knight.hitPoint;
-            pHpMobs.Value = skeleton.hitPoint;
+            pHpMobs.Value = Mob.hitPoint;
         }
         private void AddCoins()
         {

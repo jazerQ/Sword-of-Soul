@@ -17,9 +17,12 @@ namespace Sword_of_Soul
 {
     abstract class Mob
     {
+        protected string UriStand;
+        protected string UriHit;
+        protected string UriDeath;
         public int hitPoint;
         public int attack;
-        public Mob(int hitPoint, int attack) 
+        public Mob(int hitPoint, int attack)
         {
             this.hitPoint = hitPoint;
             this.attack = attack;
@@ -30,35 +33,37 @@ namespace Sword_of_Soul
     }
     class Skeleton : Mob
     {
-        private DispatcherTimer timer = new DispatcherTimer();
-        private readonly string UriStand = @"animation/Skeleton Idle.gif";
-        private readonly string UriHit = @"animation/Skeleton Hit.gif";
-        private readonly string UriDeath = @"animation/Skeleton Dead.gif";
-        public Skeleton(int hitPoint, int attack) : base(hitPoint, attack) { }
-        public override void Stand(Image image) 
+         
+        public Skeleton(int hitPoint, int attack) : base(hitPoint, attack) 
+        {
+            UriStand = @"animation/Skeleton Idle.gif";
+            UriHit = @"animation/Skeleton Hit.gif";
+            UriDeath = @"animation/Skeleton Dead.gif";
+        }
+        public override void Stand(Image image)
         {
             ImageBehavior.SetAnimatedSource(image, new BitmapImage(new Uri(UriStand, UriKind.RelativeOrAbsolute)));
         }
         public override Task Hit(Image image)
         {
-            
-                return Task.Run(() =>
-                {
-                    try
-                    {
-                        Application.Current.Dispatcher.Invoke(() => ImageBehavior.SetAnimatedSource(image, new BitmapImage(new Uri(UriHit, UriKind.RelativeOrAbsolute))));
-                        Thread.Sleep(400);
-                        Application.Current.Dispatcher.Invoke(() => Stand(image));
-                    }
-                    catch(Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                });
 
-                
-                
-            
+            return Task.Run(() =>
+            {
+                try
+                {
+                    Application.Current.Dispatcher.Invoke(() => ImageBehavior.SetAnimatedSource(image, new BitmapImage(new Uri(UriHit, UriKind.RelativeOrAbsolute))));
+                    Thread.Sleep(400);
+                    Application.Current.Dispatcher.Invoke(() => Stand(image));
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            });
+
+
+
+
         }
         /*private void Timer_tick_Death(object sender, EventArgs e)
         {
@@ -67,31 +72,33 @@ namespace Sword_of_Soul
         }*/
         public override Task Death(Image image)
         {
-            
-            return Task.Run(() => {
-                Application.Current.Dispatcher.Invoke(() => { ImageBehavior.SetAnimatedSource(image, new BitmapImage(new Uri(UriDeath, UriKind.RelativeOrAbsolute)));
+
+            return Task.Run(() =>
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    ImageBehavior.SetAnimatedSource(image, new BitmapImage(new Uri(UriDeath, UriKind.RelativeOrAbsolute)));
                     /*timer.Interval = TimeSpan.FromMilliseconds(1500);
                     timer.Tick += ((s, e) => {
                         timer.Stop();*/
-                    
-                   
+
+
 
                     /*});
                     timer.Start();*/
-                    });
+                });
                 Thread.Sleep(1200);
-                Application.Current.Dispatcher.Invoke(() => Stand(image));
+                
             }
-            ) ;
-            
-            
+            );
+
+
         }
 
-        
+
     }
     class Knight : Mob
     {
-        private readonly string UriStand = @"animation/New Piskel (2).png";
         public Knight(int hitPoint, int attack) : base(hitPoint, attack) { }
         public override void Stand(Image image)
         {
@@ -104,6 +111,72 @@ namespace Sword_of_Soul
         public override Task Death(Image image)
         {
             throw new NotImplementedException();
+        }
+    }
+    class SimpleMob : Mob
+    {
+        
+        public SimpleMob(int hitPoint, int attack) : base(hitPoint, attack) { }
+        public override void Stand(Image image)
+        {
+            image.Source = ImageConverter.ConvertStringToImageSource(UriStand);
+        }
+        public override Task Hit(Image image)
+        {
+
+            return Task.Run(() =>
+            {
+                try
+                {
+                    Application.Current.Dispatcher.Invoke(() => image.Source = ImageConverter.ConvertStringToImageSource(UriHit));
+                    Thread.Sleep(100);
+                    Application.Current.Dispatcher.Invoke(() => Stand(image));
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            });
+        }
+        public override Task Death(Image image)
+        {
+
+            return Task.Run(() =>
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    image.Source = ImageConverter.ConvertStringToImageSource(UriDeath);
+                    /*timer.Interval = TimeSpan.FromMilliseconds(1500);
+                    timer.Tick += ((s, e) => {
+                        timer.Stop();*/
+
+
+
+                    /*});
+                    timer.Start();*/
+                });
+                Thread.Sleep(300);
+                
+            }
+            );
+        }
+    }
+    class Zombie : SimpleMob
+    {
+        
+        public Zombie(int hitPoint, int attack) : base(hitPoint, attack) {
+            UriStand = @"C:\Users\user\source\repos\Sword of Soul\Sword of Soul\images\zombie.png";
+            UriHit = @"C:\Users\user\source\repos\Sword of Soul\Sword of Soul\images\zombie hit.png";
+            UriDeath = @"C:\Users\user\source\repos\Sword of Soul\Sword of Soul\images\zombie die.png";
+        }
+    }
+    class Ghost : SimpleMob
+    {
+         public Ghost(int hitPoint, int attack) : base(hitPoint, attack) {
+            UriStand = @"C:\Users\user\source\repos\Sword of Soul\Sword of Soul\images\ghost.png";
+            UriHit = @"C:\Users\user\source\repos\Sword of Soul\Sword of Soul\images\ghostHit.png";
+            UriDeath = @"C:\Users\user\source\repos\Sword of Soul\Sword of Soul\images\ghost die.png";
+
         }
     }
 }

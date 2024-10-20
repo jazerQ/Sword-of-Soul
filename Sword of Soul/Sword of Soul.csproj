@@ -141,6 +141,12 @@
     <Resource Include="images\fon.png" />
     <Resource Include="images\suck coin.png" />
     <Resource Include="images\coin.png" />
+    <Resource Include="images\ghost.png" />
+    <Resource Include="images\ghostHit.png" />
+    <Resource Include="images\zombie die.png" />
+    <Resource Include="images\zombie.png" />
+    <Resource Include="images\zombie hit.png" />
+    <Resource Include="images\ghost die.png" />
     <Content Include="music\Ale-and-Anecdotes-MP3%28chosic.com%29.mp3" />
     <Content Include="music\The-Pyre%28chosic.com%29.mp3" />
   </ItemGroup>
