@@ -37,8 +37,32 @@
         
         <ProgressBar x:Name="pHpKnight" Opacity="0.75" Grid.Column="1" Grid.Row="5"  Foreground="DarkRed" Value="100"/>
         <TextBlock Grid.Column="1"  HorizontalAlignment="Center" Grid.Row="6"   Text="HP" VerticalAlignment="Top" FontSize="30" FontFamily="MingLiU_HKSCS-ExtB"/>
-        
 
+        <Image Source="C:\Users\user\source\repos\Sword of Soul\Sword of Soul\images\coin.png" Grid.Column="3" Grid.Row="4" Grid.RowSpan="2"></Image>
+        <TextBlock x:Name="Coins" Text="0" Grid.Row="6" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial Black" FontSize="24"></TextBlock>
+        <Grid Grid.Column="2" Grid.Row="4" Grid.RowSpan="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.4*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="0.4*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5" Height="5" Background="#FF33ABAB"></Grid>
+            <Grid Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5" Height="5" Background="#FF33ABAB"></Grid>
+            <Grid Grid.Column="2" Grid.RowSpan="5" Width="5" Background="#FF33ABAB"></Grid>
+            <Grid Grid.Column="4" Grid.RowSpan="5" Width="5" Background="#FF33ABAB"></Grid>
+        </Grid>
     </Grid>
     
 </Window>
