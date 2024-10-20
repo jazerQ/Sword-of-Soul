@@ -9,6 +9,9 @@ using System.Windows.Media.Imaging;
 using WpfAnimatedGif;
 using System.Windows.Threading;
 using System.Windows;
+using System.Timers;
+using System.CodeDom;
+using System.Windows.Media.Animation;
 
 namespace Sword_of_Soul
 {
@@ -22,11 +25,12 @@ namespace Sword_of_Soul
             this.attack = attack;
         }
         public abstract void Stand(Image image);
-        public abstract void Hit(Image image);
-        public abstract void Death(Image image);
+        public abstract Task Hit(Image image);
+        public abstract Task Death(Image image);
     }
     class Skeleton : Mob
     {
+        private DispatcherTimer timer = new DispatcherTimer();
         private readonly string UriStand = @"animation/Skeleton Idle.gif";
         private readonly string UriHit = @"animation/Skeleton Hit.gif";
         private readonly string UriDeath = @"animation/Skeleton Dead.gif";
@@ -35,56 +39,69 @@ namespace Sword_of_Soul
         {
             ImageBehavior.SetAnimatedSource(image, new BitmapImage(new Uri(UriStand, UriKind.RelativeOrAbsolute)));
         }
-        public override void Hit(Image image)
+        public override Task Hit(Image image)
         {
-            try
-            {
-                ImageBehavior.SetAnimatedSource(image, new BitmapImage(new Uri(UriHit, UriKind.RelativeOrAbsolute)));
-                DispatcherTimer timer = new DispatcherTimer();
-                timer.Interval = TimeSpan.FromMilliseconds(700);
-                timer.Tick += (s, e) =>
+            
+                return Task.Run(() =>
                 {
-                    timer.Stop();
-                    Stand(image);
-                };
-                timer.Start();
-
+                    try
+                    {
+                        Application.Current.Dispatcher.Invoke(() => ImageBehavior.SetAnimatedSource(image, new BitmapImage(new Uri(UriHit, UriKind.RelativeOrAbsolute))));
+                        Thread.Sleep(400);
+                        Application.Current.Dispatcher.Invoke(() => Stand(image));
+                    }
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                });
 
                 
                 
-            }catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            
         }
-        public override void Death(Image image)
+        /*private void Timer_tick_Death(object sender, EventArgs e)
         {
-            ImageBehavior.SetAnimatedSource(image, new BitmapImage(new Uri(UriDeath, UriKind.RelativeOrAbsolute)));
-            DispatcherTimer timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromMilliseconds(700);
-            timer.Tick += (s, e) =>
-            {
-                timer.Stop();
-                image.Source = null;
-            };
-            timer.Start();
-        }
-        
+            timer.Stop();
+           
+        }*/
+        public override Task Death(Image image)
+        {
+            
+            return Task.Run(() => {
+                Application.Current.Dispatcher.Invoke(() => { ImageBehavior.SetAnimatedSource(image, new BitmapImage(new Uri(UriDeath, UriKind.RelativeOrAbsolute)));
+                    /*timer.Interval = TimeSpan.FromMilliseconds(1500);
+                    timer.Tick += ((s, e) => {
+                        timer.Stop();*/
+                    
+                   
 
+                    /*});
+                    timer.Start();*/
+                    });
+                Thread.Sleep(1200);
+                Application.Current.Dispatcher.Invoke(() => Stand(image));
+            }
+            ) ;
+            
+            
+        }
+
+        
     }
     class Knight : Mob
     {
-        private readonly string UriStand = @"animation/Knight Idle.gif";
+        private readonly string UriStand = @"animation/New Piskel (2).png";
         public Knight(int hitPoint, int attack) : base(hitPoint, attack) { }
         public override void Stand(Image image)
         {
             ImageBehavior.SetAnimatedSource(image, new BitmapImage(new Uri(UriStand, UriKind.RelativeOrAbsolute)));
         }
-        public override void Hit(Image image)
+        public override Task Hit(Image image)
         {
             throw new NotImplementedException();
         }
-        public override void Death(Image image)
+        public override Task Death(Image image)
         {
             throw new NotImplementedException();
         }

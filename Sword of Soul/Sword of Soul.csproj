@@ -136,6 +136,8 @@
     <Resource Include="images\Hills Free %28update 3.0%29.png" />
     <Resource Include="animation\Skeleton Attack.gif" />
     <Resource Include="animation\Skeleton Dead.gif" />
+    <Resource Include="animation\New Piskel %282%29.png" />
+    <Resource Include="images\fon.png" />
     <Content Include="music\Ale-and-Anecdotes-MP3%28chosic.com%29.mp3" />
     <Content Include="music\The-Pyre%28chosic.com%29.mp3" />
   </ItemGroup>

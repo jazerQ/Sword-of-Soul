@@ -32,29 +32,29 @@ namespace Sword_of_Soul
             Cursors.Set(this);
             Skeleton skeleton = new Skeleton(100, 5);
             skeleton.Stand(placeForMobs);
-            knight.Stand(placeForKnight);
+           
         }
 
-        private void punchField_Click(object sender, RoutedEventArgs e)
+        private async void punchField_Click(object sender, RoutedEventArgs e)
         {
-            if(skeleton == null)
-            {
-                return;
-            }
+            punchField.IsEnabled = false;
+            
             skeleton.hitPoint -= knight.attack;
             knight.hitPoint -= skeleton.attack;
-            if(skeleton.hitPoint <= 0) {
-                skeleton.Death(placeForMobs);
-                skeleton = null;
-                punchField.IsEnabled = false;
-                pHpKnight.Value = knight.hitPoint;
-                pHpMobs.Value = 0;
-                return;
-            }
-            knight.attack = rand.Next(5,8);
             pHpKnight.Value = knight.hitPoint;
             pHpMobs.Value = skeleton.hitPoint;
-            skeleton.Hit(placeForMobs);
+            if (skeleton.hitPoint <= 0) {
+                await skeleton.Death(placeForMobs);
+                pHpKnight.Value = knight.hitPoint;
+                pHpMobs.Value = 100;
+                skeleton.hitPoint = 100;
+                punchField.IsEnabled = true;
+                return;
+            }
+            knight.attack = rand.Next(15, 30);
+            await skeleton.Hit(placeForMobs);
+            punchField.IsEnabled = true;
+
         }
     }
 }
