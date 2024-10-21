@@ -28,7 +28,7 @@ namespace Sword_of_Soul
             if (Mob.hitPoint <= 0)
             {
                 await Mob.Death(placeForMobs);
-                Mob = Mobs[rand.Next(0, 3)];
+                Mob = Mobs[rand.Next(0, 3)].Clone();
                 Mob.Stand(placeForMobs);
                 pHpMobs.Value = Mob.hitPoint;
                 Mob.hitPoint = 100;
