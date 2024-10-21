@@ -12,7 +12,17 @@ namespace Sword_of_Soul
         public static void MutualAttack(Mob mob, Mob knight)
         {
             mob.hitPoint -= knight.attack;
+
             knight.hitPoint -= mob.attack;
+            
+        }
+        public static bool IsKnightDead(Mob knight)
+        {
+            if(knight.hitPoint <= 0)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

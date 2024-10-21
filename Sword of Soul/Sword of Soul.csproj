@@ -59,17 +59,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Battle.cs" />
+    <Compile Include="GameBattle\Battle.cs" />
     <Compile Include="Cursors.cs" />
     <Compile Include="game.xaml.cs">
       <DependentUpon>game.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GamePrivateMethods.cs" />
+    <Compile Include="GameBattle\GamePrivateMethods.cs" />
     <Compile Include="Menu.xaml.cs">
       <DependentUpon>Menu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Mob.cs" />
+    <Compile Include="Money.cs" />
     <Compile Include="Music.cs" />
+    <Compile Include="Shop.xaml.cs">
+      <DependentUpon>Shop.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UpGrage.xaml.cs">
+      <DependentUpon>UpGrage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WelcomeIntro\ImageConverter.cs" />
     <Compile Include="WelcomeIntro\Interface1.cs" />
     <Compile Include="WelcomeIntro\JazerQStudioWelcomeAnimation.cs" />
@@ -92,6 +99,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Menu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Shop.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UpGrage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -147,6 +162,10 @@
     <Resource Include="images\zombie.png" />
     <Resource Include="images\zombie hit.png" />
     <Resource Include="images\ghost die.png" />
+    <Resource Include="images\tavern.jpg" />
+    <Resource Include="images\woody.png" />
+    <Content Include="music\148968245-8-bit-game-text-typing-1.m4a" />
+    <Content Include="music\148968245-8-bit-game-text-typing-1.mp3" />
     <Content Include="music\Ale-and-Anecdotes-MP3%28chosic.com%29.mp3" />
     <Content Include="music\The-Pyre%28chosic.com%29.mp3" />
   </ItemGroup>

@@ -16,7 +16,7 @@ namespace Sword_of_Soul
         {
             _mediaPlayer.MediaEnded += _mediaPlayer_MediaEnded;
         }
-
+        
         private void _mediaPlayer_MediaEnded(object sender, EventArgs e)
         {
             currentTrackIndex++;

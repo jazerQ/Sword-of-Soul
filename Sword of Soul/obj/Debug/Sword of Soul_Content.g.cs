@@ -8,6 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("music/148968245-8-bit-game-text-typing-1.m4a")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("music/148968245-8-bit-game-text-typing-1.mp3")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("music/ale-and-anecdotes-mp3(chosic.com).mp3")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("music/the-pyre(chosic.com).mp3")]
 
