@@ -12,203 +12,173 @@ using System.Windows;
 using System.Timers;
 using System.CodeDom;
 using System.Windows.Media.Animation;
+using System.ComponentModel.Design;
 
 namespace Sword_of_Soul
 {
-    abstract class Mob
+    public class UriState
     {
-        protected string UriStand;
-        protected string UriHit;
-        protected string UriDeath;
+        public string UriStand { get; set; }
+        public string UriHit { get; set; }
+        public string UriDeath { get; set; }
+        public Image image { get; set; }
+    }
+    class Feature
+    {
         public int hitPoint;
         public int attack;
-        public Mob(int hitPoint, int attack)
+        public Feature(int hitPoint, int attack)
         {
             this.hitPoint = hitPoint;
             this.attack = attack;
         }
-        public Mob(Mob mob)
+    }
+    public interface State
+    {
+        void State(string uri);
+    }
+    public class MobState : UriState, State
+    {
+        public void State(string uri)
         {
-            this.hitPoint = mob.hitPoint;
-            this.attack = mob.attack;
+
+            
+            ImageBehavior.SetAnimatedSource(image, new BitmapImage(new Uri(uri, UriKind.RelativeOrAbsolute)));
+            
+
+                
+            
         }
-        public abstract void Stand(Image image);
-        public abstract Task Hit(Image image);
-        public abstract Task Death(Image image);
-        public abstract Mob Clone();
+        
+    }
+
+    public class MobStand
+    {
+        public MobStand(UriState uriState)
+        {
+            this.mobState.UriStand = uriState.UriStand;
+            this.mobState.UriHit = uriState.UriHit;
+            this.mobState.UriDeath = uriState.UriDeath;
+            this.mobState.image = uriState.image;
+        }
+
+        private MobState mobState = new MobState();
+        public void Stand()
+        {
+            mobState.State(mobState.UriStand);
+        }
+        public Task Hit()
+        {
+            mobState.State(mobState.UriHit);
+            return Task.Run(() => Task.Delay(300));
+        }
+        public Task Death()
+        {
+            mobState.State(mobState.UriDeath);
+            return Task.Run(() => Task.Delay(800)) ;
+        }
+    }
+    
+    class Mob
+    {
+        protected UriState uriState = new UriState();
+        public Feature feature;
+        public MobStand state;
+        
+        public Mob(int hitPoint, int attack,Image image)
+        {
+            this.feature = new Feature(hitPoint, attack);
+
+            
+            this.uriState.image = image;
+            state = new MobStand(uriState);
+
+        }
+       
+        public virtual Mob Clone()
+        {
+            Mob newMob = new Mob(this.feature.hitPoint, this.feature.attack, this.uriState.image)
+            {
+                feature = new Feature(this.feature.hitPoint, this.feature.attack),
+
+
+            };
+            return newMob;
+        }
+
     }
     class Skeleton : Mob
     {
          
-        public Skeleton(int hitPoint, int attack) : base(hitPoint, attack) 
+        public Skeleton(int hitPoint, int attack, Image image) : base(hitPoint, attack, image) 
         {
-            UriStand = @"animation/Skeleton Idle.gif";
-            UriHit = @"animation/Skeleton Hit.gif";
-            UriDeath = @"animation/Skeleton Dead.gif";
+            uriState.UriStand = @"animation/Skeleton Idle.gif";
+            uriState.UriHit = @"animation/Skeleton Hit.gif";
+            uriState.UriDeath = @"animation/Skeleton Dead.gif";
+            state = new MobStand(uriState);
         }
-        public Skeleton(Skeleton skeleton) : this(skeleton.hitPoint, skeleton.attack) { }
-        public override void Stand(Image image)
-        {
-            ImageBehavior.SetAnimatedSource(image, new BitmapImage(new Uri(UriStand, UriKind.RelativeOrAbsolute)));
-        }
-        public override Task Hit(Image image)
-        {
-
-            return Task.Run(() =>
-            {
-                try
-                {
-                    Application.Current.Dispatcher.Invoke(() => ImageBehavior.SetAnimatedSource(image, new BitmapImage(new Uri(UriHit, UriKind.RelativeOrAbsolute))));
-                    Thread.Sleep(400);
-                    Application.Current.Dispatcher.Invoke(() => Stand(image));
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-            });
-
-
-
-
-        }
-        /*private void Timer_tick_Death(object sender, EventArgs e)
-        {
-            timer.Stop();
-           
-        }*/
-        public override Task Death(Image image)
-        {
-
-            return Task.Run(() =>
-            {
-                Application.Current.Dispatcher.Invoke(() =>
-                {
-                    ImageBehavior.SetAnimatedSource(image, new BitmapImage(new Uri(UriDeath, UriKind.RelativeOrAbsolute)));
-                    /*timer.Interval = TimeSpan.FromMilliseconds(1500);
-                    timer.Tick += ((s, e) => {
-                        timer.Stop();*/
-
-
-
-                    /*});
-                    timer.Start();*/
-                });
-                Thread.Sleep(1200);
-                //Application.Current.Dispatcher.Invoke(() => Stand(image));
-            }
-            );
-
-
-        }
-        public override Mob Clone()
-        {
-            return new Skeleton(this.hitPoint, this.attack);
-        }
-
-    }
-    class Knight : Mob
-    {
-        public Knight(int hitPoint, int attack) : base(hitPoint, attack) { }
-        public override void Stand(Image image)
-        {
-            ImageBehavior.SetAnimatedSource(image, new BitmapImage(new Uri(UriStand, UriKind.RelativeOrAbsolute)));
-        }
-        public override Task Hit(Image image)
-        {
-            throw new NotImplementedException();
-        }
-        public override Task Death(Image image)
-        {
-            throw new NotImplementedException();
-        }
-        public override Mob Clone()
-        {
-            return new Knight(this.hitPoint, this.attack);
-        }
-    }
-    class SimpleMob : Mob
-    {
         
-        public SimpleMob(int hitPoint, int attack) : base(hitPoint, attack) { }
-        public SimpleMob(SimpleMob simple) : this(simple.hitPoint, simple.attack) { }
-        public override void Stand(Image image)
+        public override Mob Clone()
         {
-            ImageBehavior.SetAnimatedSource(image, new BitmapImage(new Uri(UriStand, UriKind.RelativeOrAbsolute)));
+            Mob newMob = new Skeleton(this.feature.hitPoint, this.feature.attack, this.uriState.image);
+            
+            return newMob;
         }
-        public override Task Hit(Image image)
+
+
+    }
+    class Knight
+    {
+        private static Knight _knight;
+        public Feature feature;
+        public string name { get; set; }
+        public static Knight Instance(int hitPoint, int attack, string name)
         {
-
-            return Task.Run(() =>
+            if(_knight == null)
             {
-                try
-                {
-                    Application.Current.Dispatcher.Invoke(() => ImageBehavior.SetAnimatedSource(image, new BitmapImage(new Uri(UriHit, UriKind.RelativeOrAbsolute))));
-                    Thread.Sleep(100);
-                    Application.Current.Dispatcher.Invoke(() => Stand(image));
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-            });
-        }
-        public override Task Death(Image image)
-        {
-
-            return Task.Run(() =>
-            {
-                Application.Current.Dispatcher.Invoke(() =>
-                {
-                    ImageBehavior.SetAnimatedSource(image, new BitmapImage(new Uri(UriDeath, UriKind.RelativeOrAbsolute)));
-                    /*timer.Interval = TimeSpan.FromMilliseconds(1500);
-                    timer.Tick += ((s, e) => {
-                        timer.Stop();*/
-
-
-
-                    /*});
-                    timer.Start();*/
-                });
-                Thread.Sleep(300);
-                
+                _knight = new Knight(hitPoint, attack, name);
             }
-            );
+            return _knight;
         }
-        public override Mob Clone()
+        protected Knight(int hitPoint, int attack, string name) 
         {
-            return new SimpleMob(this.hitPoint, this.attack);
+            this.feature = new Feature(hitPoint, attack);
+            
+            this.name = name;
         }
     }
-    class Zombie : SimpleMob
+    
+    class Zombie : Mob
     {
 
-        public Zombie(int hitPoint, int attack) : base(hitPoint, attack)
+        public Zombie(int hitPoint, int attack, Image image) : base(hitPoint, attack,image)
         {
-            UriStand = @"C:\Users\user\source\repos\Sword of Soul\Sword of Soul\images\zombie.png";
-            UriHit = @"C:\Users\user\source\repos\Sword of Soul\Sword of Soul\images\zombie hit.png";
-            UriDeath = @"C:\Users\user\source\repos\Sword of Soul\Sword of Soul\images\zombie die.png";
+            uriState.UriStand = @"C:\Users\user\source\repos\Sword of Soul\Sword of Soul\images\zombie.png";
+            uriState.UriHit = @"C:\Users\user\source\repos\Sword of Soul\Sword of Soul\images\zombie hit.png";
+            uriState.UriDeath = @"C:\Users\user\source\repos\Sword of Soul\Sword of Soul\images\zombie die.png";
+            state = new MobStand(uriState);
         }
-        public Zombie(Zombie zomb) : this(zomb.hitPoint, zomb.attack)
-        {
-        }
+        
         public override Mob Clone()
         {
-            return new Zombie(this.hitPoint, this.attack);
+            Mob newMob = new Zombie(this.feature.hitPoint, this.feature.attack, this.uriState.image);
+
+            return newMob;
         }
     }
-    class Ghost : SimpleMob
+    class Ghost : Mob
     {
-         public Ghost(int hitPoint, int attack) : base(hitPoint, attack) {
-            UriStand = @"C:\Users\user\source\repos\Sword of Soul\Sword of Soul\images\ghost.png";
-            UriHit = @"C:\Users\user\source\repos\Sword of Soul\Sword of Soul\images\ghostHit.png";
-            UriDeath = @"C:\Users\user\source\repos\Sword of Soul\Sword of Soul\images\ghost die.png";
-
+         public Ghost(int hitPoint, int attack, Image image) : base(hitPoint, attack, image) {
+            uriState.UriStand = @"C:\Users\user\source\repos\Sword of Soul\Sword of Soul\images\ghost.png";
+            uriState.UriHit = @"C:\Users\user\source\repos\Sword of Soul\Sword of Soul\images\ghostHit.png";
+            uriState.UriDeath = @"C:\Users\user\source\repos\Sword of Soul\Sword of Soul\images\ghost die.png";
+            state = new MobStand(uriState);
          }
-         public Ghost(Ghost ghost) : this(ghost.hitPoint, ghost.attack) { }
-        public override Mob Clone()
-        {
-            return new Ghost(this.hitPoint, this.attack);
-        }
+         public override Mob Clone()
+         {
+             Mob newMob = new Ghost(this.feature.hitPoint, this.feature.attack, this.uriState.image);
+
+             return newMob;
+         }
     }
 }

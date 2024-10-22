@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,11 +12,11 @@ namespace Sword_of_Soul
     public partial class game 
     {
         
-        private Knight knight = new Knight(100, 5);
-        
+        private Knight knight =Knight.Instance(1000, 5, "NN");
+       
         private static Random rand = new Random();
-        private static Mob[] Mobs = new Mob[] { new Skeleton(100,rand.Next(5,8)), new Ghost(100, rand.Next(20, 30)), new Zombie(100, rand.Next(10, 16)) };
-        private static Mob Mob = Mobs[rand.Next(0,3)];
+        private static Mob[] Mobs;
+        private static Mob Mob ;
         
 
         //Methods
@@ -25,19 +26,21 @@ namespace Sword_of_Soul
 
             Battle.MutualAttack(Mob, knight);
             UpdatingProgressBar();
-            if (Mob.hitPoint <= 0)
+            if (Battle.isMobDead(Mob))
             {
-                await Mob.Death(placeForMobs);
+                await Mob.state.Death();
                 Mob = Mobs[rand.Next(0, 3)].Clone();
-                Mob.Stand(placeForMobs);
-                pHpMobs.Value = Mob.hitPoint;
-                Mob.hitPoint = 100;
+                Mob.state.Stand();
+                Mob.feature.hitPoint = 100;
+                pHpMobs.Value = Mob.feature.hitPoint;
+                
                 AddCoins();
                 punchField.IsEnabled = true;
                 return;
             }
-            knight.attack = rand.Next(15, 30);
-            await Mob.Hit(placeForMobs);
+            knight.feature.attack = rand.Next(15, 30);
+            await Mob.state.Hit();
+            Mob.state.Stand();
             if (Battle.IsKnightDead(knight))
             {
                 Shop shop = new Shop();
@@ -49,8 +52,8 @@ namespace Sword_of_Soul
         }
         private void UpdatingProgressBar()
         {
-            pHpKnight.Value = knight.hitPoint;
-            pHpMobs.Value = Mob.hitPoint;
+            pHpKnight.Value = knight.feature.hitPoint;
+            pHpMobs.Value = Mob.feature.hitPoint;
         }
         private void AddCoins()
         {
