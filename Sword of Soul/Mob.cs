@@ -16,6 +16,11 @@ using System.ComponentModel.Design;
 
 namespace Sword_of_Soul
 {
+    static class HealthPower
+    {
+        static public int Health = 100;
+        static public int Power = 20;
+    }
     public class UriState
     {
         public string UriStand { get; set; }

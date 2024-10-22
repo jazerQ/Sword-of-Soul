@@ -28,6 +28,8 @@ namespace Sword_of_Soul
         {
             InitializeComponent();
             Cursors.Set(this);
+            LoadTitleHpPower();
+            NewKnight();
             Mobs = new Mob[] { new Skeleton(100, rand.Next(5, 8), placeForMobs), new Ghost(100, rand.Next(20, 30), placeForMobs), new Zombie(100, rand.Next(10, 16), placeForMobs) };
             Mob = Mobs[rand.Next(0, 3)];
             Mob.state.Stand();

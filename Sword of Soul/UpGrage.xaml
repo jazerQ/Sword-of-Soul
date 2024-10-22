@@ -21,5 +21,30 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Image Source="C:\Users\user\source\repos\Sword of Soul\Sword of Soul\images\woody.png" Grid.Column="1" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Stretch="None" Height="91" Margin="0,22,0,0"></Image>
+        <TextBlock x:Name="Speech" Grid.Column="1" Grid.Row="2" TextWrapping="Wrap" Text="" HorizontalAlignment="Center" VerticalAlignment="Top" Background="#83000000" Foreground="Gainsboro" FontFamily="Monocraft"/>
+        <Button x:Name="Trade" IsEnabled="False" Grid.Column="1" Content="Торговаться" HorizontalAlignment="Center" FontFamily="Monocraft"  Grid.Row="2" VerticalAlignment="Center" Margin="0,0,0,70" Foreground="#FFB3ACAC">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFFE8B19"/>
+                    <GradientStop Color="#FFC42B2F" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button x:Name="Talk" Grid.Column="1" Content="Начать разговор" HorizontalAlignment="Center" FontFamily="Monocraft"  Grid.Row="2" VerticalAlignment="Center" Margin="0,0,0,20" Foreground="#FFB3ACAC">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFFE8B19"/>
+                    <GradientStop Color="#FFC42B2F" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button x:Name="GoFight" Grid.Column="1" Content="Идти в лес" HorizontalAlignment="Center" FontFamily="Monocraft"  Grid.Row="2" VerticalAlignment="Center" Margin="0,30,0,0" Foreground="#FFB3ACAC">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF941805"/>
+                    <GradientStop Color="#FFE6070D" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
     </Grid>
 </Window>

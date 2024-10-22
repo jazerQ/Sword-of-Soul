@@ -36,7 +36,8 @@
 
         
         <ProgressBar x:Name="pHpKnight" Opacity="0.75" Grid.Column="1" Grid.Row="5"  Foreground="DarkRed" Value="100"/>
-        <TextBlock Grid.Column="1"  HorizontalAlignment="Center" Grid.Row="6"   Text="HP" VerticalAlignment="Top" FontSize="30" FontFamily="Monocraft"/>
+        <TextBlock x:Name="HpTitle" Grid.Column="1"  HorizontalAlignment="Left" Grid.Row="6"   Text="HP 100" VerticalAlignment="Top" FontSize="15" FontFamily="Monocraft"/>
+        <TextBlock x:Name="PowerTitle" Grid.Column="1"  HorizontalAlignment="Right" Grid.Row="6"   Text="Power 100" VerticalAlignment="Top" FontSize="15" FontFamily="Monocraft"/>
 
         <Image Source="C:\Users\user\source\repos\Sword of Soul\Sword of Soul\images\coin.png" Grid.Column="3" Grid.Row="4" Grid.RowSpan="2"></Image>
         <TextBlock x:Name="Coins" Text="0" Grid.Row="6" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Monocraft" FontSize="24"></TextBlock>

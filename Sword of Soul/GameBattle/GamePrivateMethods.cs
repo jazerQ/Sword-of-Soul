@@ -12,7 +12,7 @@ namespace Sword_of_Soul
     public partial class game 
     {
         
-        private Knight knight =Knight.Instance(1000, 5, "NN");
+        private Knight knight =Knight.Instance(HealthPower.Health, HealthPower.Power, "NN");
        
         private static Random rand = new Random();
         private static Mob[] Mobs;
@@ -38,7 +38,7 @@ namespace Sword_of_Soul
                 punchField.IsEnabled = true;
                 return;
             }
-            knight.feature.attack = rand.Next(15, 30);
+            knight.feature.attack = rand.Next(knight.feature.attack, knight.feature.attack + 3);
             await Mob.state.Hit();
             Mob.state.Stand();
             if (Battle.IsKnightDead(knight))
@@ -57,8 +57,19 @@ namespace Sword_of_Soul
         }
         private void AddCoins()
         {
-            Money.coins += rand.Next(3, 6);
+            Money.coins += rand.Next(300, 600);
             Coins.Text = Money.coins.ToString() ;
         }
+        private void LoadTitleHpPower()
+        {
+            HpTitle.Text ="Heath = " + HealthPower.Health.ToString();
+            PowerTitle.Text ="Power = " + HealthPower.Power.ToString();
+        }
+        private void NewKnight()
+        {
+            knight.feature.hitPoint = HealthPower.Health;
+            knight.feature.attack = HealthPower.Power;
+        }
     }
+
 }
